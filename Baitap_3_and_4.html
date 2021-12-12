@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài tập 3 và bài tập 4</title>
+</head>
+<body>
+<!--cau 3 lenh nhân gia tri tu 1 o input là-->
+<p>Câu 3</p>
+<input id="a" type="text" name="a">
+<input id="b" type="text" name="b">
+<button onclick="cau3()">Tính Diện tích</button>
+<h1 id="inText"></h1>
+<hr>
+<!--Bài 4-a-->
+<p>Câu 4</p>
+<div>
+    <label for="C4_a">Nhập a :</label>
+    <input  id="C4_a" type="text">
+
+</div>
+<br>
+<div>
+    <label for="C4_b">Nhập b :</label>
+    <input id="C4_b" type="text">
+
+</div>
+<br>
+<div>
+    <label for="C4_c">Nhập c :</label>
+    <input id="C4_c" type="text">
+
+</div>
+<br>
+<button onclick="cau4()"> Tính</button>
+<div>
+    <pre id="inra_4"> KET qua</pre>
+</div>
+<script>
+    function cau3(){
+        let a=parseFloat(document.getElementById("a").value)
+        let b=parseFloat(document.getElementById("b").value)
+        let S=a*b
+        document.getElementById("inText").innerHTML="Diện tích hình chữ nhật là :"+S
+    }
+    function cau4()
+    {
+        let a4=document.getElementById("C4_a").value;
+        let b4=document.getElementById("C4_b").value;
+        let c4=document.getElementById("C4_c").value;
+        let a4f=parseFloat(a4)
+        let b4f=parseFloat(b4)
+        let c4f=parseFloat(c4)
+        //nhap a
+        if (a4 !=="" && b4==="" && c4==="") {
+            let S4=Math.pow(a4f,2)
+            let p4=4*a4f;
+            let century=parseInt(a4f/100) +1;
+            document.getElementById("inra_4").innerHTML="Câu 4-a:Diện tích của hình vuông độ dài cạnh bằng "
+                + a4 + " là: "+ S4 +",Chu vi  là: " + p4 + "\n" +"Câu 4-d:Năm " +a4+ " là Thế kỷ " + century
+        }else if (a4 !=="" && b4!=="" && c4==="") { // Nhập a và b
+            let a_mu2=Math.pow(a4f,2);
+            let a_mub=Math.pow(a4f,b4f);
+            let sum=0
+            if (b4f >=a4f) {
+                for(a4f; a4f <= b4f; a4f++) {
+                    sum = sum+a4f
+                }
+                document.getElementById("inra_4").innerHTML="câu 4-b:a^2 là: " +a_mu2 +", a^b bằng " + a_mub+
+                    "\n" + "câu 4-c :Tổng các số từ a đến b là " +sum;
+            }else {
+                for(b4f; b4f <= a4f; b4f++) {
+                    sum = sum+b4f
+                }
+                document.getElementById("inra_4").innerHTML="câu 4-b:a^2 là: " +a_mu2 +", a^b bằng " + a_mub+
+                    "\n" + "câu 4-c :Tổng các số từ b đến a là " +sum;
+            }
+
+        }else if (a4 !=="" && b4!=="" && c4!=="") { //nhập a,b,c
+            let edges=[a4f,b4f,c4f];
+            function compareNumbers(a, b) {
+                return a - b;
+            }
+            let sort_edges=edges.sort(compareNumbers)
+            let isTriangle=sort_edges[2]<sort_edges[0]+sort_edges[1];
+            let isTamgiaccan=sort_edges[2]===sort_edges[1] || sort_edges[0]===sort_edges[1];
+            let isTamgiacdeu=sort_edges[2]===sort_edges[0];
+            let isTamgiacvuong=Math.pow(sort_edges[2],2)===Math.pow(sort_edges[1],2)+Math.pow(sort_edges[0],2);
+            if (isTriangle===true){
+                document.getElementById("inra_4").innerHTML="Đây là tam giác Thường";
+                if (isTamgiaccan===true ) {
+                    document.getElementById("inra_4").innerHTML = "Đây là tam giác Cân";
+                }
+                if ( isTamgiacdeu===true) {
+                    document.getElementById("inra_4").innerHTML = "Đây là tam giác Đều";
+                }
+                if ( isTamgiacvuong===true) {
+                    document.getElementById("inra_4").innerHTML = "Đây là tam giác Vuông";
+                }
+
+                if ( isTamgiacvuong===true && isTamgiaccan===true) {
+                document.getElementById("inra_4").innerHTML = "Đây là tam giác Vuông Cân";
+                }
+            }else {
+                document.getElementById("inra_4").innerHTML="Đây Không phải là tam giác";
+            }
+
+        }else {
+            alert("Bạn nhập thiếu dữ liệu của đề bài")
+        }
+    }
+
+</script>
+</body>
+</html>
